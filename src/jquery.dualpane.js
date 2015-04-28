@@ -18,29 +18,40 @@
     $leftCol.css('width', (opts.leftColWidth * 100) + '%');
     resizeRightCol();
 
-    $dragbar.mousedown(function (e) {
+    // Handle the drag bar
+    $dragbar.on('mousedown touchstart', function (e) {
       e.preventDefault();
 
       $(document)
-        .mousemove(function (e) {
-          var newWidth = e.clientX - $leftCol.offset().left;
+        .bind('mousemove touchmove', function (e) {
+          if (event.type == 'touchmove') {
+            var xPos = e.originalEvent.touches[0].clientX;
+          } else {
+            var xPos = e.clientX;
+          }
+
+          console.log(xPos);
+
+          var newWidth = xPos - $leftCol.offset().left;
 
           if (newWidth >= opts.limit && newWidth <= $panes.width() - opts.limit) {
-            $leftCol.css('width', (e.clientX - $leftCol.offset().left) + 'px');
+            $leftCol.css('width', (xPos - $leftCol.offset().left) + 'px');
             resizeRightCol();
           }
         })
-        .mouseup(function (e) {
-          $(document).unbind("mousemove");
+        .bind('mouseup touchend',function (e) {
+          $(document).unbind('mousemove touchmove');
         });
     });
 
+    // Resize it proportionally
     $(window).on('resize', function () {
       var widthPercentage = $leftCol.outerWidth() / $panes.outerWidth();
       $leftCol.css('width', (widthPercentage * 100) + '%');
       resizeRightCol();
     });
 
+    // Resize the right column to take up the remaining space
     function resizeRightCol() {
       $rightCol.css('width', ($panes.outerWidth() - $leftCol.outerWidth() - $dragbar.outerWidth()) + 'px');
     }
@@ -49,8 +60,8 @@
   };
 
   $.fn.dualpane.defaults = {
-    leftColWidth: 0.5,
-    limit: 50
+    leftColWidth: 0.5,  // Percentage width of left column
+    limit: 50           // Limit of drag (in px)
   };
 
 }(jQuery));
