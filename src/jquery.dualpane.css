@@ -25,9 +25,9 @@
 
   .jquery-dualpane .jquery-dualpane-dragbar::after {
     color: #aaa;
-    font: normal 12px Arial, sans-serif;
     content: '=';
     display: block;
+    font: normal 12px Arial, sans-serif;
     margin-top: -0.5em;
     position: relative;
     top: 50%;

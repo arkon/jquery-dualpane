@@ -83,7 +83,7 @@
   };
 
   $.fn.dualpane.defaults = {
-    leftColWidth: 900,
+    leftColWidth: 500,
     limit: 100
   };
 
