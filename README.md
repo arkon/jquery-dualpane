@@ -1,1 +1,1 @@
-# jquery-panes
+# jquery-dualpane
