@@ -14,11 +14,18 @@
     var $dragbar = $('<div class="jquery-dualpane-dragbar"></div>');
     $leftCol.after($dragbar);
 
-    // Initial pane widths
-    var leftColWidth = convertWidth(opts.leftColWidth);
+    // Initial pane widths (prioritize right column)
+    if (opts.rightColWidth) {
+      var rightColWidth = convertWidth(opts.rightColWidth);
 
-    $leftCol.css('width', leftColWidth);
-    resizeRightCol();
+      $rightCol.css('width', rightColWidth);
+      $leftCol.css('width', ($panes.outerWidth() - $rightCol.outerWidth() - $dragbar.outerWidth()) + 'px');
+    } else {
+      var leftColWidth = convertWidth(opts.leftColWidth);
+
+      $leftCol.css('width', leftColWidth);
+      resizeRightCol();
+    }
 
     // Handle the drag bar
     $dragbar.on('mousedown touchstart', function (e) {
@@ -32,8 +39,6 @@
             var xPos = e.clientX;
           }
 
-          console.log(xPos);
-
           var newWidth = xPos - $leftCol.offset().left;
 
           if (newWidth >= opts.limit && newWidth <= $panes.width() - opts.limit) {
@@ -41,12 +46,12 @@
             resizeRightCol();
           }
         })
-        .bind('mouseup touchend',function (e) {
+        .bind('mouseup touchend', function (e) {
           $(document).unbind('mousemove touchmove');
         });
     });
 
-    // Resize it proportionally
+    // Resize proportionally
     $(window).on('resize', function () {
       var widthPercentage = $leftCol.outerWidth() / $panes.outerWidth();
       $leftCol.css('width', (widthPercentage * 100) + '%');
@@ -63,6 +68,11 @@
       if (val % 1 !== 0) {
         val = (val * 100) + '%';
       } else {
+        // Prevent width from being wider than the window
+        if (val >= $panes.width() - opts.limit) {
+          val = $panes.width() - opts.limit;
+        }
+
         val = val + 'px';
       }
 
@@ -73,8 +83,8 @@
   };
 
   $.fn.dualpane.defaults = {
-    leftColWidth: 0.6,
-    limit: 50
+    leftColWidth: 900,
+    limit: 100
   };
 
 }(jQuery));
