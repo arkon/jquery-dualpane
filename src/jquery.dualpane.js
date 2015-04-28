@@ -15,7 +15,9 @@
     $leftCol.after($dragbar);
 
     // Initial pane widths
-    $leftCol.css('width', (opts.leftColWidth * 100) + '%');
+    var leftColWidth = convertWidth(opts.leftColWidth);
+
+    $leftCol.css('width', leftColWidth);
     resizeRightCol();
 
     // Handle the drag bar
@@ -52,16 +54,27 @@
     });
 
     // Resize the right column to take up the remaining space
-    function resizeRightCol() {
+    function resizeRightCol () {
       $rightCol.css('width', ($panes.outerWidth() - $leftCol.outerWidth() - $dragbar.outerWidth()) + 'px');
+    }
+
+    // Deal with percentage or pixel widths
+    function convertWidth (val) {
+      if (val % 1 !== 0) {
+        val = (val * 100) + '%';
+      } else {
+        val = val + 'px';
+      }
+
+      return val;
     }
 
     return this;
   };
 
   $.fn.dualpane.defaults = {
-    leftColWidth: 0.5,  // Percentage width of left column
-    limit: 50           // Limit of drag (in px)
+    leftColWidth: 0.6,
+    limit: 50
   };
 
 }(jQuery));
