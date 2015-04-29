@@ -75,7 +75,7 @@ Initial right column width of 300px, with a gutter limit of 50px:
 
 ```JavaScript
 $('#my-selector').dualpane({
-    rightColWidth: 300
+    rightColWidth: 300,
     limit: 50
 });
 ```
