@@ -1,16 +1,17 @@
 .jquery-dualpane {
-  height: 100%;
+  max-width: 100%;
   position: absolute;
-  width: 100%;
+  white-space: nowrap;
 }
 
 .jquery-dualpane > div {
   box-sizing: border-box;
   display: inline-block;
-  float: left;
   height: 100%;
   overflow: auto;
   position: relative;
+  vertical-align: top;
+  white-space: normal;
 }
 
 .jquery-dualpane .jquery-dualpane-dragbar {
