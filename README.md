@@ -2,6 +2,8 @@
 
 A simple, lightweight jQuery plugin for creating a dual-pane view with resizeable columns.
 
+[Demo page](http://echeung.me/jquery-dualpane)
+
 
 ## Installation
 
@@ -38,14 +40,14 @@ $('#my-selector').dualpane();
 
 ## Options
 
-### leftColWidth
+### `leftColWidth`
 
 **Default**: 0.5 *(i.e. 50%)*
 
 A decimal or integer value representing the initial width of the left column. If it's a decimal, it will be evaluated as a percentage value (of the parent element's width). If it's an integer, it is used as an exact pixel amount.
 
 
-### rightColWidth
+### `rightColWidth`
 
 **Default**: none
 
@@ -54,7 +56,7 @@ A decimal or integer value representing the initial width of the left column. If
 A decimal or integer value representing the initial width of the right column. If it's a decimal, it will be evaluated as a percentage value (of the parent element's width). If it's an integer, it is used as an exact pixel amount.
 
 
-### limit
+### `limit`
 
 **Default**: 100 *(i.e. 100px)*
 
