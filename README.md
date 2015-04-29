@@ -1,6 +1,6 @@
 # jquery-dualpane
 
-A simple, lightweight jQuery plugin for creating a dual-pane view.
+A simple, lightweight jQuery plugin for creating a dual-pane view with resizeable columns.
 
 
 ## Installation
