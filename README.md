@@ -8,13 +8,13 @@ A simple, lightweight jQuery plugin for creating a dual-pane view.
 Simply include the script on the page that you'd like to use it (after the jQuery library):
 
 ```HTML
-<script src='/path/to/jquery.dual[ane.min.js'></script>
+<script src='/path/to/jquery.dualpane.min.js'></script>
 ```
 
 Also remember to add the stylesheet for some default goodness:
 
 ```HTML
-<link href='/path/to/jquery.dualpane.css'>
+<link href='/path/to/jquery.dualpane.min.css'>
 ```
 
 
@@ -24,8 +24,8 @@ In your HTML, you need to have some element with exactly 2 nested `<div>`s:
 
 ```HTML
 <div id='my-selector'>
-    <div>Left pane</div>
-    <div>Right pane</div>
+    <div>Left pane contents</div>
+    <div>Right pane contents</div>
 </div>
 ```
 
