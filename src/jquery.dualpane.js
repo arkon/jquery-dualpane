@@ -33,15 +33,17 @@
 
       $(document)
         .bind('mousemove touchmove', function (e) {
+          var xPos;
+
           if (e.type == 'touchmove') {
-            var xPos = e.originalEvent.touches[0].clientX;
+            xPos = e.originalEvent.touches[0].clientX;
           } else {
-            var xPos = e.clientX;
+            xPos = e.clientX;
           }
 
           var newWidth = xPos - $leftCol.offset().left;
 
-          if (newWidth >= opts.limit && newWidth <= $panes.width() - opts.limit) {
+          if (newWidth >= opts.limit && newWidth <= $panes.outerWidth() - opts.limit) {
             $leftCol.css('width', (xPos - $leftCol.offset().left) + 'px');
             resizeRightCol();
           }
@@ -54,7 +56,17 @@
     // Resize proportionally
     $(window).on('resize', function () {
       var widthPercentage = $leftCol.outerWidth() / $panes.outerWidth();
-      $leftCol.css('width', (widthPercentage * 100) + '%');
+      var newWidth = widthPercentage * $panes.outerWidth();
+
+      // Gutter limit
+      if (newWidth < opts.limit)
+        newWidth = opts.limit + 'px';
+      else if (newWidth > ($panes.outerWidth() - opts.limit))
+        newWidth = ($panes.outerWidth() - opts.limit) + 'px';
+      else
+        newWidth = (widthPercentage * 100) + '%';
+
+      $leftCol.css('width', newWidth);
       resizeRightCol();
     });
 
@@ -69,8 +81,8 @@
         val = (val * 100) + '%';
       } else {
         // Prevent width from being wider than the window
-        if (val >= $panes.width() - opts.limit) {
-          val = $panes.width() - opts.limit;
+        if (val >= $panes.outerWidth() - opts.limit) {
+          val = $panes.outerWidth() - opts.limit;
         }
 
         val = val + 'px';
