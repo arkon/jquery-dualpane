@@ -31,5 +31,7 @@
     margin-top: -0.5em;
     position: relative;
     top: 50%;
+    -ms-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
   }
