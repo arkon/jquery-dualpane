@@ -33,7 +33,7 @@
 
       $(document)
         .bind('mousemove touchmove', function (e) {
-          if (event.type == 'touchmove') {
+          if (e.type == 'touchmove') {
             var xPos = e.originalEvent.touches[0].clientX;
           } else {
             var xPos = e.clientX;
