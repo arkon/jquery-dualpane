@@ -7,8 +7,8 @@
     this.addClass('jquery-dualpane');
 
     var $panes = this;
-    var $leftCol = this.find('div:first-child');
-    var $rightCol = this.find('div:last-child');
+    var $leftCol = this.children().first();
+    var $rightCol = this.children().last();
 
     // Add the drag bar
     var $dragbar = $('<div class="jquery-dualpane-dragbar"></div>');
